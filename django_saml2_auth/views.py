@@ -117,7 +117,7 @@ def denied(r):
 
 
 def _create_new_user(username, email, firstname, lastname):
-    user = User.objects.create_user(username, email)
+    user = User.objects.create_user(username, email, firstname, lastname)
     user.first_name = firstname
     user.last_name = lastname
     groups = [Group.objects.get(name=x) for x in settings.SAML2_AUTH.get('NEW_USER_PROFILE', {}).get('USER_GROUPS', [])]
