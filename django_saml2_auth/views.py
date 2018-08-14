@@ -164,7 +164,7 @@ def acs(r):
             import_string(settings.SAML2_AUTH['TRIGGER']['BEFORE_LOGIN'])(user_identity)
     except User.DoesNotExist:
         if settings.SAML2_AUTH.get('CALLABLE', {}).get('CREATE_USER', None):
-            import_string(settings.SAML2_AUTH['CALLABLE']['BEFORE_LOGIN'])(user_identity)
+            target_user = import_string(settings.SAML2_AUTH['CALLABLE']['CREATE_USER'])(user_identity)
         else:
             target_user = _create_new_user(user_name, user_email, user_first_name, user_last_name)
         if settings.SAML2_AUTH.get('TRIGGER', {}).get('CREATE_USER', None):
